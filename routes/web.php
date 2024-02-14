@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FigureController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('figure');
 });
+
+Route::post('/calculate-data', [FigureController::class, "calculateData"]);
