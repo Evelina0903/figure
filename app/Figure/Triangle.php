@@ -4,10 +4,9 @@ namespace App\Figure;
 
 use App\Exceptions\InvalidFigureParameters;
 
-class Circle implements GeometricFigure
+class Triangle implements GeometricFigure
 {
-
-    public float $radius;
+    public array $edges;
 
     /**
      * @throws InvalidFigureParameters
@@ -15,7 +14,7 @@ class Circle implements GeometricFigure
     public function __construct(array $params)
     {
         if($this->validateParams($params)){
-            $this->radius=$params['radius'];
+            $this->edges=$params['edges'];
         }else{
             throw new InvalidFigureParameters();
         }
@@ -33,15 +32,21 @@ class Circle implements GeometricFigure
 
     public function validateParams(array $params)
     {
-        if(!array_key_exists("radius",$params)){
+        if(!array_key_exists("edges", $params)){
             return false;
         }
 
-        if(!is_numeric($params['radius']) || (float)$params['radius']<=0){
+        $edges = $params["edges"];
+        if(count($edges)<3){
             return false;
+        }
+
+        foreach ($edges as $edge){
+            if(!is_numeric($edge) || (float)$edge<=0){
+                return false;
+            }
         }
 
         return true;
     }
 }
-
