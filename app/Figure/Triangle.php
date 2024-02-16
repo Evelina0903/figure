@@ -11,32 +11,28 @@ class Triangle implements GeometricFigure
     /**
      * @throws InvalidFigureParameters
      */
-    public function __construct(array $params)
+    public function __construct(array $edges)
     {
-        if($this->validateParams($params)){
-            $this->edges=$params['edges'];
+        if($this->validateEdges($edges)){
+            $this->edges=$edges;
         }else{
             throw new InvalidFigureParameters();
         }
     }
 
-    public function calculatingPerimeter(array $params)
+    public function calculatingPerimeter()
     {
-
+        return $this->edges[0] + $this->edges[1] + $this->edges[2];
     }
 
-    public function calculatingSquare(array $params)
+    public function calculatingSquare()
     {
-        // TODO: Implement calculatingSquare() method.
+        $halfMeter = $this->calculatingPerimeter() / 2;
+        return sqrt($halfMeter * ($halfMeter - $this->edges[0]) * ($halfMeter - $this->edges[1]) * ($halfMeter - $this->edges[2]));
     }
 
-    public function validateParams(array $params)
+    public function validateEdges(array $edges)
     {
-        if(!array_key_exists("edges", $params)){
-            return false;
-        }
-
-        $edges = $params["edges"];
         if(count($edges)<3){
             return false;
         }

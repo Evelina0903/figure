@@ -12,42 +12,32 @@ class Rectangle implements GeometricFigure
     /**
      * @throws InvalidFigureParameters
      */
-    public function __construct(array $params)
+    public function __construct(float $width, float $height)
     {
-        if($this->validateParams($params)){
-            $this->width=$params['width'];
-            $this->height=$params['height'];
+        if($this->validateEdge($width) && $this->validateEdge($height)){
+            $this->width = $width;
+            $this->height = $height;
         }else{
             throw new InvalidFigureParameters();
         }
     }
 
-    public function calculatingPerimeter(array $params)
+    public function calculatingPerimeter()
     {
-
+        return 2 * ($this->width + $this->height);
     }
 
-    public function calculatingSquare(array $params)
+    public function calculatingSquare()
     {
-        // TODO: Implement calculatingSquare() method.
+        return $this->width * $this->height;
     }
 
-    public function validateParams(array $params)
+    public function validateEdge(float $edge)
     {
-        if(!array_key_exists("width", $params)){
+        if($edge <= 0){
             return false;
+        }else{
+            return true;
         }
-        if(!array_key_exists("height", $params)){
-            return false;
-        }
-
-        if(!is_numeric($params['width']) || (float)$params['width']<=0){
-            return false;
-        }
-        if(!is_numeric($params['height']) || (float)$params['height']<=0){
-            return false;
-        }
-
-        return true;
     }
 }

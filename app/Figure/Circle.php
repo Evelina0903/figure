@@ -6,42 +6,36 @@ use App\Exceptions\InvalidFigureParameters;
 
 class Circle implements GeometricFigure
 {
-
     public float $radius;
-
     /**
      * @throws InvalidFigureParameters
      */
-    public function __construct(array $params)
+    public function __construct(float $radius)
     {
-        if($this->validateParams($params)){
-            $this->radius=$params['radius'];
+        if($this->validateRadius($radius)){
+            $this->radius = $radius;
         }else{
             throw new InvalidFigureParameters();
         }
     }
 
-    public function calculatingPerimeter(array $params)
+    public function calculatingPerimeter()
     {
-
+        return 2 * M_PI * $this->radius;
     }
 
-    public function calculatingSquare(array $params)
+    public function calculatingSquare()
     {
-        // TODO: Implement calculatingSquare() method.
+        return M_PI * pow($this->radius,2);
     }
 
-    public function validateParams(array $params)
+    public function validateRadius(float $radius)
     {
-        if(!array_key_exists("radius",$params)){
+        if($radius <= 0){
             return false;
+        }else{
+            return true;
         }
-
-        if(!is_numeric($params['radius']) || (float)$params['radius']<=0){
-            return false;
-        }
-
-        return true;
     }
 }
 

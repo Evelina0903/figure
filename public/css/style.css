@@ -4,6 +4,15 @@
 
 }
 .parameter-figure{
-    padding-top: 30px;
+    /*padding-top: 10px;*/
     padding-bottom: 30px;
+    margin-top: 20px;
+
+}
+
+.card-figure{
+    padding-bottom: 10px;
+}
+.input-parameter{
+    margin-top: 5px;
 }
