@@ -55,14 +55,38 @@
             <div class="row parameter-figure">
 
                 <div class="col-sm-6 mb-3 mb-sm-0 card-figure triangle">
-                    <div class="card">
+                    <div class="card border-warning">
                         <div class="card-body">
                             <h5 class="card-title">Фигура №: Треугольник</h5>
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center ">
                                 <div class="col">
-                                    <input type="number" class="form-control input-parameter" id="" min="0" step="1" placeholder="сторона a">
-                                    <input type="number" class="form-control input-parameter" id="" min="0" step="1" placeholder="сторона b">
-                                    <input type="number" class="form-control input-parameter" id="" min="0" step="1" placeholder="сторона c">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона c">
+                                </div>
+                                <div class="col-md-auto align-self-end my-auto">
+                                    <a href="" type="button"
+                                       class="btn btn-outline-danger  align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6 mb-3 mb-sm-0 card-figure circle">
+                    <div class="card border-primary">
+                        <div class="card-body ">
+                            <h5 class="card-title">Фигура №: Круг</h5>
+                            <div class="row justify-content-center ">
+                                <div class="col">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="радиус">
                                 </div>
                                 <div class="col-md-auto align-self-end my-auto">
                                     <a href="" type="button"
@@ -79,6 +103,29 @@
                     </div>
                 </div>
 
+                <div class="col-sm-6 mb-3 mb-sm-0 card-figure rectangle">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <h5 class="card-title">Фигура №: Прямоугольник</h5>
+                            <div class="row justify-content-center">
+                                <div class="col">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b">
+                                </div>
+                                <div class="col-md-auto align-self-end my-auto">
+                                    <a href="" type="button"
+                                       class="btn btn-outline-danger  align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                            <path
+                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
