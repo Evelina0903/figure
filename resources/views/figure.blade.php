@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @vite('resources/js/figure.js')
+
 </head>
 
 <body>
@@ -22,7 +24,7 @@
 
         <div class="row btn-figure">
             <div class="col d-grid gap-2">
-                <button type="button" class="btn btn-outline-primary btn-lg" id="circle">
+                <button type="button" class="btn btn-outline-primary btn-lg" id="circle" >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                          class="bi bi-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -52,87 +54,13 @@
         <div class="parameter-figure">
             <p class="text-center fs-4">Заполните параметры </p>
 
-            <div class="row parameter-figure">
-
-                <div class="col-sm-6 mb-3 mb-sm-0 card-figure triangle">
-                    <div class="card border-warning">
-                        <div class="card-body">
-                            <h5 class="card-title">Фигура №: Треугольник</h5>
-                            <div class="row justify-content-center ">
-                                <div class="col">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона c">
-                                </div>
-                                <div class="col-md-auto align-self-end my-auto">
-                                    <a href="" type="button"
-                                       class="btn btn-outline-danger  align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-sm-6 mb-3 mb-sm-0 card-figure circle">
-                    <div class="card border-primary">
-                        <div class="card-body ">
-                            <h5 class="card-title">Фигура №: Круг</h5>
-                            <div class="row justify-content-center ">
-                                <div class="col">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="радиус">
-                                </div>
-                                <div class="col-md-auto align-self-end my-auto">
-                                    <a href="" type="button"
-                                       class="btn btn-outline-danger  align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-sm-6 mb-3 mb-sm-0 card-figure rectangle">
-                    <div class="card border-success">
-                        <div class="card-body">
-                            <h5 class="card-title">Фигура №: Прямоугольник</h5>
-                            <div class="row justify-content-center">
-                                <div class="col">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b">
-                                </div>
-                                <div class="col-md-auto align-self-end my-auto">
-                                    <a href="" type="button"
-                                       class="btn btn-outline-danger  align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                             fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                                            <path
-                                                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="row parameter-figure" id="all-figures">
 
             </div>
 
 
             <div class="row d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-outline-secondary btn-lg" type="button">Посчитать</button>
+                <button class="btn btn-outline-secondary btn-lg" id = "calculation" type="button">Посчитать</button>
             </div>
 
         </div>

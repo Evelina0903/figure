@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 
 class FigureController extends Controller
 {
+
     public function calculateData(Request $request){
+        Log:info($request);
         try{
             switch ($request->input("type")){
                 case "circle":
