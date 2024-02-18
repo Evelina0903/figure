@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidFigureParameters;
 use App\Figure\Circle;
+use App\Figure\Rectangle;
+use App\Figure\Triangle;
 use Exception;
 use Illuminate\Http\Request;
 

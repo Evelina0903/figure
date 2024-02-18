@@ -1,5 +1,7 @@
 import './app.js';
 
+
+
 const allFiguresDiv= document.getElementById("all-figures");
 let currentCardId = 1;
 function addCardCircle(){
@@ -7,9 +9,10 @@ function addCardCircle(){
                     <div class="card border-primary">
                         <div class="card-body ">
                             <h5 class="card-title">Фигура ${currentCardId}: Круг</h5>
-                            <div class="row justify-content-center ">
+                            <div class="row justify-content-center">
                                 <div class="col">
                                     <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="радиус">
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="col-md-auto align-self-end my-auto">
                                     <button type="button"
@@ -36,11 +39,14 @@ function addCardTriangle(){
                     <div class="card border-warning">
                         <div class="card-body">
                             <h5 class="card-title">Фигура ${currentCardId}: Треугольник</h5>
-                            <div class="row justify-content-center ">
+                            <div class="row justify-content-center">
                                 <div class="col">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона c">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a" >
+                                    <div class="invalid-feedback"></div>
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b" >
+                                    <div class="invalid-feedback"></div>
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона c" >
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="col-md-auto align-self-end my-auto">
                                     <button  type="button"
@@ -62,14 +68,16 @@ function addCardTriangle(){
     currentCardId++;
 };
 function addCardRectangle(){
-    let card = `<div class="col-sm-6 mb-3 mb-sm-0 card-figure" data-type = "rectangle" data-id = "${currentCardId}">
+    let card = `<div class="col-sm-6 mb-3 mb-sm-0 card-figure " data-type = "rectangle" data-id = "${currentCardId}">
                     <div class="card border-success">
                         <div class="card-body">
                             <h5 class="card-title">Фигура ${currentCardId}: Прямоугольник</h5>
                             <div class="row justify-content-center">
                                 <div class="col">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a">
-                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b">
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона a" >
+                                    <div class="invalid-feedback"></div>
+                                    <input type="number" class="form-control input-parameter" min="0" step="1" placeholder="сторона b" >
+                                    <div class="invalid-feedback"></div>
                                 </div>
                                 <div class="col-md-auto align-self-end my-auto">
                                     <button  type="button"
@@ -103,28 +111,73 @@ function deleteCard(event){
 function calculationFigure(){
     let cards = document.getElementsByClassName("card-figure");
     let data = [];
+    let dataIsValid = true;
 
     for (let i = 0; i < cards.length; i++){
         let figure = {};
         figure.type = cards[i].dataset.type;
+        let id = cards[i].dataset.id;
+        let validate;
 
         switch (figure.type){
             case 'circle':
                 figure.radius = cards[i].getElementsByTagName('input')[0].value;
+                validate = validateParameter(figure.type, [figure.radius], id);
+                if (!validate.valid){
+                    cards[i].getElementsByTagName('input')[0].classList.remove("is-valid");
+                    cards[i].getElementsByTagName('input')[0].classList.add("is-invalid");
+                    cards[i].getElementsByClassName('invalid-feedback')[0].innerHTML = "";
+                    cards[i].getElementsByClassName('invalid-feedback')[0].innerHTML = validate.message;
+                    dataIsValid = false;
+                }else{
+                    cards[i].getElementsByTagName('input')[0].classList.remove("is-invalid");
+                    cards[i].getElementsByTagName('input')[0].classList.add("is-valid");
+                }
                 break;
             case 'rectangle':
                 figure.width = cards[i].getElementsByTagName('input')[0].value;
                 figure.height = cards[i].getElementsByTagName('input')[1].value;
+                validate = validateParameter(figure.type, [figure.width, figure.height], id);
+
+                for(let inputNumber = 0; inputNumber < 2; inputNumber++){
+                    if (!validate.rows[inputNumber].valid){
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.remove("is-valid");
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.add("is-invalid");
+                        cards[i].getElementsByClassName('invalid-feedback')[inputNumber].innerHTML = "";
+                        cards[i].getElementsByClassName('invalid-feedback')[inputNumber].innerHTML = validate.rows[inputNumber].message;
+                        dataIsValid = false;
+                    }else{
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.remove("is-invalid");
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.add("is-valid");
+                    }
+                }
+
                 break;
             case 'triangle':
                 figure.edges = [];
                 for(let j = 0; j < 3; j++){
                     figure.edges.push(cards[i].getElementsByTagName('input')[j].value)
                 }
+                validate = validateParameter(figure.type, figure.edges, id);
+
+                for(let inputNumber = 0; inputNumber < 3; inputNumber++){
+                    if (!validate.rows[inputNumber].valid){
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.remove("is-valid");
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.add("is-invalid");
+                        cards[i].getElementsByClassName('invalid-feedback')[inputNumber].innerHTML = "";
+                        cards[i].getElementsByClassName('invalid-feedback')[inputNumber].innerHTML = validate.rows[inputNumber].message;
+                        dataIsValid = false;
+                    }else{
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.remove("is-invalid");
+                        cards[i].getElementsByTagName('input')[inputNumber].classList.add("is-valid");
+                    }
+                }
                 break;
         }
         data.push(figure);
     }
+
+    if(dataIsValid){
         axios.post('/calculate-data', data)
             .then(function (response) {
                 console.log(response);
@@ -132,7 +185,153 @@ function calculationFigure(){
             .catch(function (error) {
                 console.log(error);
             });
+    }
+
 };
+
+function validateParameter(type, params, id) {
+    let validationResponse = {
+        figureId : id
+    };
+
+    switch (type){
+        case 'circle':
+
+            if(params[0] === null) {
+
+                validationResponse.valid = false;
+                validationResponse.errorRow = 0;
+                validationResponse.message = "Поле радиус должно быть заполненно!";
+
+                return validationResponse;
+            }
+            if(params[0] <= 0) {
+
+                validationResponse.valid = false;
+                validationResponse.errorRow = 0;
+                validationResponse.message = "Поле радиус должно быть положительным!";
+
+                return validationResponse;
+            }
+
+            validationResponse.valid = true;
+            validationResponse.message = "Все параметры валидны!";
+
+            return validationResponse;
+
+
+        case 'rectangle':
+            validationResponse.valid = true;
+            validationResponse.rows = [
+                {
+                    valid: true,
+                    message: 'Поле ширины валидно!'
+                },
+                {
+                    valid: true,
+                    message: 'Поле длины валидно!'
+                }
+            ];
+
+            if(params[0] === null) {
+                validationResponse.valid = false;
+                validationResponse.rows[0].valid = false;
+                validationResponse.rows[0].message = "Поле ширины должнл быть заполненно!";
+            }
+
+            if(params[1] === null) {
+                validationResponse.valid = false;
+                validationResponse.rows[1].valid = false;
+                validationResponse.rows[1].message = "Поле длинны должно быть заполненно!";
+            }
+
+            if(params[0] <= 0 ) {
+                validationResponse.valid = false;
+                validationResponse.rows[0].valid = false;
+                validationResponse.rows[0].message = "Поле ширины должно быть положительным!";
+            }
+
+            if(params[1] <= 0 ) {
+                validationResponse.valid = false;
+                validationResponse.rows[1].valid = false;
+                validationResponse.rows[1].message = "Поле длинны должно быть положительным!";
+
+            }
+            return validationResponse;
+
+        case 'triangle':
+            validationResponse.valid = true;
+            validationResponse.rows = [
+                {
+                    valid: true,
+                    message: 'Поле - сторона a валидно!'
+                },
+                {
+                    valid: true,
+                    message: 'Поле - сторона b длины валидно!'
+                },
+                {
+                    valid: true,
+                    message: 'Поле - сторона c длины валидно!'
+                }
+            ];
+            if(params[0] === null) {
+                validationResponse.valid = false;
+                validationResponse.rows[0].valid = false;
+                validationResponse.rows[0].message = "Поле - сторона a должно быть заполненно!";
+
+            }
+
+            if(params[1] === null) {
+                validationResponse.valid = false;
+                validationResponse.rows[1].valid = false;
+                validationResponse.rows[1].message = "Поле - сторона b должно быть заполненно!";
+            }
+
+            if(params[2] === null) {
+                validationResponse.valid = false;
+                validationResponse.rows[2].valid = false;
+                validationResponse.rows[2].message = "Поле - сторона c должно быть заполненно!";
+            }
+
+            if(params[0] <= 0 ) {
+                validationResponse.valid = false;
+                validationResponse.rows[0].valid = false;
+                validationResponse.rows[0].message = "Поле - сторона a должно быть положительным!";
+            }
+
+            if(params[1] <= 0 ) {
+                validationResponse.valid = false;
+                validationResponse.rows[1].valid = false;
+                validationResponse.rows[1].message = "Поле - сторона b должно быть положительным!";
+            }
+
+            if(params[2] <= 0 ) {
+                validationResponse.valid = false;
+                validationResponse.rows[2].valid = false;
+                validationResponse.rows[2].message = "Поле - сторона c должно быть положительным!";
+            }
+
+            if(params[0] > params[1] + params[2] ) {
+                validationResponse.valid = false;
+                validationResponse.rows[0].valid = false;
+                validationResponse.rows[0].message = "Сторона a должна быть меньше суммы двух других сторон!";
+            }
+
+            if(params[1] > params[0] + params[2] ) {
+                validationResponse.valid = false;
+                validationResponse.rows[1].valid = false;
+                validationResponse.rows[1].message = "Сторона b должна быть меньше суммы двух других сторон!";
+            }
+
+            if(params[2] > params[0] + params[1] ) {
+                validationResponse.valid = false;
+                validationResponse.rows[2].valid = false;
+                validationResponse.rows[2].message = "Сторона c должна быть меньше суммы двух других сторон!";
+            }
+            return validationResponse;
+    }
+}
 
 document.getElementById("circle").addEventListener("click",addCardCircle);
 document.getElementById("triangle").addEventListener("click",addCardTriangle);

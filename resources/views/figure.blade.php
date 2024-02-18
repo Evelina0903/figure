@@ -60,7 +60,7 @@
 
 
             <div class="row d-grid gap-2 col-6 mx-auto">
-                <button class="btn btn-outline-secondary btn-lg" id = "calculation" type="button">Посчитать</button>
+                <button type="submit" class="btn btn-outline-secondary btn-lg" id = "calculation" >Посчитать</button>
             </div>
 
         </div>
