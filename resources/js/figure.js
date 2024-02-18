@@ -117,6 +117,7 @@ function calculationFigure(){
         let figure = {};
         figure.type = cards[i].dataset.type;
         let id = cards[i].dataset.id;
+        figure.id = id;
         let validate;
 
         switch (figure.type){
@@ -177,10 +178,45 @@ function calculationFigure(){
         data.push(figure);
     }
 
+
     if(dataIsValid){
         axios.post('/calculate-data', data)
             .then(function (response) {
-                console.log(response);
+                let squarePerimeter = document.getElementById("square-perimeter");
+                squarePerimeter.innerHTML = "";
+                for (let i = 0; i < response.data.figures.length; i++){
+                    let result = `<div className="col">
+                        <p className="text fw-semibold">Периметр и площадь ${response.data.figures[i].id} фигуры: </p>
+                    </div>
+                    <div className="col">
+                        <p className="text">${response.data.figures[i].perimeter} , ${response.data.figures[i].square}</p>
+                    </div>
+                    `
+                    squarePerimeter.insertAdjacentHTML('beforeend', result);
+                }
+
+                let allPerimeter = document.getElementById("all-perimeter");
+                allPerimeter.innerHTML = "";
+                let resultPerimetr = `
+                <div class="col">
+                    <p class="text fw-semibold">Общий периметр:</p>
+                </div>
+                <div class="col">
+                    <p class="text">${response.data.allPerimeter}</p>
+                </div>`
+                allPerimeter.insertAdjacentHTML('beforeend', resultPerimetr);
+
+                let allSquare = document.getElementById("all-square");
+                allSquare.innerHTML = "";
+                let resultSquare = `
+                <div class="col">
+                    <p class="text fw-semibold">Общая площадь:</p>
+                </div>
+                <div class="col">
+                    <p class="text">${response.data.allSquare}</p>
+                </div>`
+                allSquare.insertAdjacentHTML('beforeend', resultSquare);
+
             })
             .catch(function (error) {
                 console.log(error);
@@ -218,7 +254,6 @@ function validateParameter(type, params, id) {
             validationResponse.message = "Все параметры валидны!";
 
             return validationResponse;
-
 
         case 'rectangle':
             validationResponse.valid = true;

@@ -67,32 +67,19 @@
 
         <div class="result">
             <p class="text fs-4">Результат</p>
-            <div class="row square-perimeter">
-                <div class="col">
-                    <p class="text fw-semibold">Площадь и периметр номер фигуры:</p>
-                </div>
-                <div class="col">
-                    <p class="text">1</p>
-                </div>
+            <div class="row " id="square-perimeter">
+
             </div>
 
-            <div class="row all-square">
-                <div class="col">
-                    <p class="text fw-semibold">Общая площадь:</p>
-                </div>
-                <div class="col">
-                    <p class="text"></p>
-                </div>
+            <div class="row" id="all-perimeter">
+
             </div>
 
-            <div class="row all-perimeter">
-                <div class="col">
-                    <p class="text fw-semibold">Общий периметр:</p>
-                </div>
-                <div class="col">
-                    <p class="text"></p>
-                </div>
+            <div class="row" id="all-square">
+
             </div>
+
+
 
         </div>
 
